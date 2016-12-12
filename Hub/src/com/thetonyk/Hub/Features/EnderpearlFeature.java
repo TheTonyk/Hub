@@ -30,30 +30,12 @@ import com.thetonyk.Hub.Utils.ItemsUtils;
 public class EnderpearlFeature implements Listener {
 	
 	private static Set<UUID> cooldown = new HashSet<>();
-	//private static List<Item> pearls = new ArrayList<>();
 	
 	public static void setup() {
 		
 		new BukkitRunnable() {
 
 			public void run() {
-				
-				/*Iterator<Item> iterator = pearls.iterator();
-				
-				while (iterator.hasNext()) {
-					
-					Item pearl = iterator.next();
-					Vector velocity = pearl.getVelocity().normalize();
-					
-					if (velocity.getY() != -0.0 && pearl.getPassenger() != null && !pearl.isDead()) continue;
-					
-					Entity passenger = pearl.getPassenger();
-					
-					iterator.remove();
-					passenger.teleport(passenger.getLocation().add(0, 0.5, 0));
-					pearl.remove();
-					
-				}*/
 				
 				for (Player player : Bukkit.getOnlinePlayers()) {
 					
@@ -122,11 +104,6 @@ public class EnderpearlFeature implements Listener {
 			
 		}.runTaskTimer(Main.plugin, 0, 20);
 		
-		/*Item pearl = player.getWorld().dropItem(player.getLocation().add(0, 1, 0), new ItemStack(Material.ENDER_PEARL));
-		pearls.add(pearl);
-		pearl.setPickupDelay(12000);
-		pearl.setVelocity(player.getLocation().getDirection().normalize().multiply(2f));
-		pearl.setPassenger(player);*/
 		EnderPearl pearl = player.launchProjectile(EnderPearl.class);
 		pearl.setPassenger(player);
 		player.spigot().setCollidesWithEntities(false);
@@ -157,7 +134,6 @@ public class EnderpearlFeature implements Listener {
 		Player player = (Player) event.getEntity();
 		
 		pearl.remove();
-		//player.teleport(player.getLocation().add(0, 0.5, 0));
 		player.spigot().setCollidesWithEntities(true);
 		
 	}

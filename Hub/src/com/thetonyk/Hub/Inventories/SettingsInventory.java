@@ -158,7 +158,7 @@ public class SettingsInventory implements Listener {
 			Settings settings = Settings.getSettings(this.player);
 			
 			if (!player.getUniqueId().equals(this.player)) return;
-			if (!inventory.equals(this.inventory)) return;
+			if (inventory == null || !inventory.equals(this.inventory)) return;
 			if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasDisplayName()) return;
 			
 			String name = item.getItemMeta().getDisplayName();

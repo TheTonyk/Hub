@@ -75,11 +75,11 @@ public class PermissionsManager {
 	
 	public static void clearPermissions(Player player) {
 		
-		PermissionAttachment permission = permissions.get(player.getUniqueId());
+		PermissionAttachment permission = permissions.remove(player.getUniqueId());
 		
 		if (permission == null) return;
 		
-		player.removeAttachment(permissions.remove(player.getUniqueId()));
+		player.removeAttachment(permission);
 		
 	}
 	

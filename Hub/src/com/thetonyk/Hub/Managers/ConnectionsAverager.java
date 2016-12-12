@@ -171,8 +171,9 @@ public class ConnectionsAverager implements Listener {
 			
 			if (ping.isEmpty()) return -1;
 			
-			amount = Math.min(amount, ping.size());
-			List<Long> selectedPing = ping.subList(ping.size() - amount, ping.size());
+			int size = ping.size();
+			amount = Math.min(amount, size);
+			List<Long> selectedPing = ping.subList(size - amount, size);
 			long sum = selectedPing.stream().mapToLong(Long::longValue).sum();
 			
 			return (sum / amount) / 1_000_000;

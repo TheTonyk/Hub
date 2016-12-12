@@ -173,8 +173,10 @@ public class PlayersManager implements Listener {
 			Settings onlineSettings = Settings.getSettings(online.getUniqueId());
 			
 			if (!settings.getPlayers() && !online.hasPermission("global.visible")) player.hidePlayer(online);
+			else player.showPlayer(online);
 			
 			if (!onlineSettings.getPlayers() && !player.hasPermission("global.visible")) online.hidePlayer(player);
+			else online.showPlayer(player);
 			
 		}
 		
