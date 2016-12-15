@@ -28,7 +28,7 @@ public class TextCommand implements CommandExecutor, TabCompleter {
 		
 		if (!(sender instanceof Player)) {
 			
-			sender.sendMessage(Main.PREFIX + "Only player can clear their inventory.");
+			sender.sendMessage(Main.PREFIX + "Only player can spawn text.");
 			return true;
 			
 		}
