@@ -11,41 +11,30 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 import com.thetonyk.Hub.Main;
-import com.thetonyk.Hub.Managers.PlayersManager;
 
+import net.minecraft.server.v1_8_R3.EntityPlayer;
 
-public class ClearCommand implements CommandExecutor, TabCompleter {
+public class HealthCommand implements CommandExecutor, TabCompleter {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
-		Player player;
+		Player player = null;
 		
-		if (args.length < 1) {
+		if (args.length < 1 && !(sender instanceof Player)) {
 			
-			if (!(sender instanceof Player)) {
-				
-				sender.sendMessage(Main.PREFIX + "Only player can clear their inventory.");
-				return true;
-				
-			}
+			sender.sendMessage(Main.PREFIX + "Usage: /" + label + " <player>");
+			return true;
 			
-			player = (Player) sender;
+		} else player = (Player) sender;
 		
-		} else {
-			
-			if (args[0].equalsIgnoreCase("*")) {
-				
-				Bukkit.getOnlinePlayers().stream().forEach(p -> PlayersManager.clearPlayer(p));
-				Bukkit.broadcastMessage(Main.PREFIX + "All players inventory has been cleared.");
-				return true;
-				
-			}
+		if (args.length >= 1) {
 			
 			player = Bukkit.getPlayer(args[0]);
-		
+			
 			if (player == null) {
 				
 				sender.sendMessage(Main.PREFIX + "The player '§a" + args[0] + "§7' is not online.");
@@ -55,15 +44,19 @@ public class ClearCommand implements CommandExecutor, TabCompleter {
 			
 		}
 		
-		PlayersManager.clearPlayer(player);
+		EntityPlayer nmsPlayer = ((CraftPlayer) player).getHandle();
+		int health = (int) ((player.getHealth() / 2) * 10);
+		int maxHealth = (int) ((player.getMaxHealth() / 2) * 10);
+		int absorptionHealth = (int) ((nmsPlayer.getAbsorptionHearts() / 2) * 10);
 		
-		if (!player.getName().equalsIgnoreCase(sender.getName())) sender.sendMessage(Main.PREFIX + "The inventory of player '§a" + player.getName() + "§7' has been cleared.");
-		
-		player.sendMessage(Main.PREFIX + "Your inventory has been cleared.");
+		sender.sendMessage(Main.PREFIX + "Health of '§a" + player.getName() + "§7':");
+		sender.sendMessage("§8⫸ §7Health: §6" + health + "§7%");
+		sender.sendMessage("§8⫸ §7Max Health: §6" + maxHealth + "§7%");
+		sender.sendMessage("§8⫸ §7Absorption: §6" + absorptionHealth + "§7%");
 		return true;
 		
 	}
-	
+
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		
 		List<String> suggestions = new ArrayList<>();
@@ -90,5 +83,5 @@ public class ClearCommand implements CommandExecutor, TabCompleter {
 		return suggestions;
 		
 	}
-	
+
 }

@@ -16,8 +16,7 @@ import org.bukkit.entity.Player;
 import com.thetonyk.Hub.Main;
 import com.thetonyk.Hub.Managers.PlayersManager;
 
-
-public class ClearCommand implements CommandExecutor, TabCompleter {
+public class HealCommand implements CommandExecutor, TabCompleter {
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 		
@@ -27,7 +26,7 @@ public class ClearCommand implements CommandExecutor, TabCompleter {
 			
 			if (!(sender instanceof Player)) {
 				
-				sender.sendMessage(Main.PREFIX + "Only player can clear their inventory.");
+				sender.sendMessage(Main.PREFIX + "Usage: /heal <player>");
 				return true;
 				
 			}
@@ -38,8 +37,8 @@ public class ClearCommand implements CommandExecutor, TabCompleter {
 			
 			if (args[0].equalsIgnoreCase("*")) {
 				
-				Bukkit.getOnlinePlayers().stream().forEach(p -> PlayersManager.clearPlayer(p));
-				Bukkit.broadcastMessage(Main.PREFIX + "All players inventory has been cleared.");
+				Bukkit.getOnlinePlayers().stream().forEach(p -> PlayersManager.healPlayer(p));
+				Bukkit.broadcastMessage(Main.PREFIX + "All players have been healed.");
 				return true;
 				
 			}
@@ -55,11 +54,11 @@ public class ClearCommand implements CommandExecutor, TabCompleter {
 			
 		}
 		
-		PlayersManager.clearPlayer(player);
+		PlayersManager.healPlayer(player);
 		
-		if (!player.getName().equalsIgnoreCase(sender.getName())) sender.sendMessage(Main.PREFIX + "The inventory of player '§a" + player.getName() + "§7' has been cleared.");
+		if (!player.getName().equalsIgnoreCase(sender.getName())) sender.sendMessage(Main.PREFIX + "The player '§a" + player.getName() + "§7' has been healed.");
 		
-		player.sendMessage(Main.PREFIX + "Your inventory has been cleared.");
+		player.sendMessage(Main.PREFIX + "Your have been healed.");
 		return true;
 		
 	}

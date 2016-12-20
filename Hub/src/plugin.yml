@@ -24,3 +24,20 @@ commands:
         permission: global.clear
     text:
         permission: global.text
+    health:
+        permission: global.health
+        aliases: [h, life]
+    heal:
+        permission: global.heal
+    sethealth:
+        permission: global.sethealth
+    give:
+        permission: global.give
+    list:
+        permission: global.list
+    effect:
+        permission: global.effect
+        aliases: [effects]
+    teleport:
+        permission: global.teleport
+        aliases: [tp]

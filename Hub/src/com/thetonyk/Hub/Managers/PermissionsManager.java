@@ -34,6 +34,8 @@ public class PermissionsManager {
 		permission.setPermission("minecraft.command.tell", false);
 		permission.setPermission("global.lag", true);
 		permission.setPermission("global.ping", true);
+		permission.setPermission("global.health", true);
+		permission.setPermission("global.list", true);
 		
 		if (rank == Rank.PLAYER) return;
 		
@@ -69,7 +71,12 @@ public class PermissionsManager {
 		permission.setPermission("global.gamemode", true);
 		permission.setPermission("global.text", true);
 		permission.setPermission("global.build", true);
-		player.setOp(true);
+		permission.setPermission("global.heal", true);
+		permission.setPermission("global.sethealth", true);
+		permission.setPermission("global.give", true);
+		permission.setPermission("global.effect", true);
+		permission.setPermission("global.teleport", true);
+		permission.setPermission("global.teleportplayers", true);
 		
 	}
 	
