@@ -257,6 +257,7 @@ public class PlayersManager implements Listener {
 			event.setJoinMessage(null);
 			player.teleport(player.getWorld().getSpawnLocation());
 			player.setGameMode(GameMode.ADVENTURE);
+			player.setMaxHealth(20);
 			player.spigot().setViewDistance(8);
 			player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
 			updateNametag(player);
